@@ -31,32 +31,8 @@ class NumbersFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
 
-        rangeMinPicker = view.findViewById(R.id.rangeMin)
-        rangeMaxPicker = view.findViewById(R.id.rangeMax)
-
-        rangeMinPicker.value = 0
-        rangeMaxPicker.value = 20
-        rangeMinPicker.minValue = 0
-        rangeMinPicker.maxValue = 90
-        rangeMaxPicker.minValue = 10
-        rangeMaxPicker.maxValue = 100
-
-        rangeMaxPicker.setOnValueChangedListener { _, _, newVal ->
-            rangeMinPicker.maxValue = newVal - 1
-        }
-
-        rangeMinPicker.setOnValueChangedListener { _, _, newVal ->
-            rangeMaxPicker.minValue = newVal + 1
-        }
-
-        shownNumber = view.findViewById(R.id.randomNum)
-
-        view.findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { _ ->
-            when(sequentialOption) {
-                true -> shownNumber.text = (Integer.parseInt(shownNumber.text.toString()) + 1).toString()
-                false -> shownNumber.text = getRandomNumber(rangeMinPicker.value, rangeMaxPicker.value).toString()
-            }
-        }
+        setNumberPickers(view)
+        setShownNumber(view)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -80,6 +56,39 @@ class NumbersFragment : Fragment() {
                 true
             }
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun setNumberPickers(view: View) {
+        rangeMinPicker = view.findViewById(R.id.rangeMin)
+        rangeMaxPicker = view.findViewById(R.id.rangeMax)
+
+        rangeMinPicker.value = 0
+        rangeMaxPicker.value = 20
+        rangeMinPicker.minValue = 0
+        rangeMinPicker.maxValue = 90
+        rangeMaxPicker.minValue = 10
+        rangeMaxPicker.maxValue = 100
+
+        rangeMaxPicker.setOnValueChangedListener { _, _, newVal ->
+            rangeMinPicker.maxValue = newVal - 1
+        }
+
+        rangeMinPicker.setOnValueChangedListener { _, _, newVal ->
+            rangeMaxPicker.minValue = newVal + 1
+        }
+    }
+
+    private fun setShownNumber(view: View) {
+        shownNumber = view.findViewById(R.id.randomNum)
+
+        view.findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { _ ->
+            when (sequentialOption) {
+                true -> shownNumber.text =
+                    (Integer.parseInt(shownNumber.text.toString()) + 1).toString()
+                false -> shownNumber.text =
+                    getRandomNumber(rangeMinPicker.value, rangeMaxPicker.value).toString()
+            }
         }
     }
 

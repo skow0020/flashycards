@@ -17,6 +17,7 @@ import kotlin.random.Random
 class WordsFragment : Fragment() {
     private var words = mutableListOf<String>()
     private val wordsFile = "words.txt"
+    private lateinit var shownWord: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,17 +29,49 @@ class WordsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val shownWord = view.findViewById<TextView>(R.id.word)
+        shownWord = view.findViewById(R.id.word)
 
         createWordsFile()
         loadWords()
+
+        setOnClickAddWord(view)
+        setOnClickRemoveWord(view)
+
         if (words.count() == 0) shownWord.text = "Add some words!"
         else shownWord.text = getRandomWord()
 
         view.findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { _ ->
             if (words.count() > 0) shownWord.text = getRandomWord()
         }
+    }
 
+    private fun setOnClickRemoveWord(view: View) {
+        view.findViewById<Button>(R.id.removeWord).setOnClickListener { _ ->
+            val alertDialog: AlertDialog.Builder = AlertDialog.Builder(view.context)
+            alertDialog.setTitle("Remove a word")
+
+            val input = EditText(view.context)
+            input.inputType = InputType.TYPE_CLASS_TEXT
+            alertDialog.setView(input)
+
+            alertDialog.setPositiveButton(
+                "OK"
+            ) { _, _ ->
+                val wordToRemove = input.text.toString()
+                if (!words.contains(wordToRemove)) {
+                    view.let { Utilities.showSnackbar(it, "Word not found to remove") }
+                } else {
+                    removeWord(wordToRemove)
+                    shownWord.text = getRandomWord()
+                }
+            }
+
+            alertDialog.create()
+            alertDialog.show()
+        }
+    }
+
+    private fun setOnClickAddWord(view: View) {
         view.findViewById<Button>(R.id.addWord).setOnClickListener { _ ->
             val alertDialog: AlertDialog.Builder = AlertDialog.Builder(view.context)
             alertDialog.setTitle("Add a word")
@@ -52,34 +85,15 @@ class WordsFragment : Fragment() {
             ) { _, _ ->
                 val newWord = input.text.toString()
                 if (newWord.isEmpty() || newWord.length > 12) {
-                    view.let { Utilities.showSnackbar(it, "Word should be between 1 and 12 characters") }
+                    view.let {
+                        Utilities.showSnackbar(
+                            it,
+                            "Word should be between 1 and 12 characters"
+                        )
+                    }
                 } else {
                     addWordViaButton(newWord)
                     shownWord.text = newWord
-                }
-            }
-
-            alertDialog.create()
-            alertDialog.show()
-        }
-
-        view.findViewById<Button>(R.id.removeWord).setOnClickListener { _ ->
-            val alertDialog: AlertDialog.Builder = AlertDialog.Builder(view.context)
-            alertDialog.setTitle("Remove a word")
-
-            val input = EditText(view.context)
-            input.inputType = InputType.TYPE_CLASS_TEXT
-            alertDialog.setView(input)
-
-            alertDialog.setPositiveButton("OK"
-            ) { _, _ ->
-                val wordToRemove = input.text.toString()
-                if (!words.contains(wordToRemove)) {
-                    view.let { Utilities.showSnackbar(it, "Word not found to remove") }
-                }
-                else {
-                    removeWord(wordToRemove)
-                    shownWord.text = getRandomWord()
                 }
             }
 
