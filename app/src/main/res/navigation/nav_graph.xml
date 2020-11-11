@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_MainFragment_to_NumbersFragment"
             app:destination="@id/NumbersFragment" />
+        <action
+            android:id="@+id/action_MainFragment_to_WordsFragment"
+            app:destination="@id/WordsFragment" />
     </fragment>
     <fragment
         android:id="@+id/ColorsFragment"
@@ -35,6 +38,15 @@
         tools:layout="@layout/fragment_numbers" >
         <action
             android:id="@+id/action_NumbersFragment_to_MainFragment"
+            app:destination="@id/MainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/WordsFragment"
+        android:name="com.example.flashycards.WordsFragment"
+        android:label="words_fragment"
+        tools:layout="@layout/fragment_words" >
+        <action
+            android:id="@+id/action_WordsFragment_to_MainFragment"
             app:destination="@id/MainFragment" />
     </fragment>
 </navigation>

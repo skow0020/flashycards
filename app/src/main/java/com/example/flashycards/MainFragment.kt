@@ -31,5 +31,9 @@ class MainFragment : Fragment() {
         view.findViewById<Button>(R.id.numbersButton).setOnClickListener {
             findNavController().navigate(R.id.action_MainFragment_to_NumbersFragment)
         }
+
+        view.findViewById<Button>(R.id.wordsButton).setOnClickListener {
+            findNavController().navigate(R.id.action_MainFragment_to_WordsFragment)
+        }
     }
 }
