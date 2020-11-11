@@ -1,0 +1,33 @@
+<resources>
+    <string name="edit_message">Enter a Message</string>
+    <string name="button_numbers">Numbers</string>
+    <string name="button_words">Words</string>
+    <string name="random_number">0</string>
+    <string name="title_activity_numbers">Numbers</string>
+    <string name="fab_content_activity_numbers">Next random number</string>
+    <string name="fab_content_activity_words">Next random word</string>
+    <string name="title_activity_words">Words</string>
+    <string name="title_activity_colors">Colors</string>
+    <string name="sequential">Sequential</string>
+    <string name="help">Help</string>
+    <string name="add_word">Add Word</string>
+    <string name="ok">OK</string>
+    <string name="remove_word">Remove Word</string>
+    <string name="add_some_words">Add some words!</string>
+    <string name="button_colors">Colors</string>
+    <string name="flashcards_title">Flash Cards</string>
+
+
+    <string name="app_name">FlashyCards</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="main_fragment_label">Main Fragment</string>
+    <string name="colors_fragment_label">Colors Fragment</string>
+    <string name="numbers_fragment_label">Numbers Fragment</string>
+    <string name="words_fragment_label">Words Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+</resources>

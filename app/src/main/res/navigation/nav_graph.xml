@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/MainFragment">
+
+    <fragment
+        android:id="@+id/MainFragment"
+        android:name="com.example.flashycards.MainFragment"
+        android:label="@string/main_fragment_label"
+        tools:layout="@layout/fragment_main">
+
+        <action
+            android:id="@+id/action_MainFragment_to_ColorsFragment"
+            app:destination="@id/ColorsFragment" />
+        <action
+            android:id="@+id/action_MainFragment_to_NumbersFragment"
+            app:destination="@id/NumbersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ColorsFragment"
+        android:name="com.example.flashycards.ColorsFragment"
+        android:label="@string/colors_fragment_label"
+        tools:layout="@layout/fragment_colors">
+
+        <action
+            android:id="@+id/action_ColorsFragment_to_MainFragment"
+            app:destination="@id/MainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/NumbersFragment"
+        android:name="com.example.flashycards.NumbersFragment"
+        android:label="fragment_numbers"
+        tools:layout="@layout/fragment_numbers" >
+        <action
+            android:id="@+id/action_NumbersFragment_to_MainFragment"
+            app:destination="@id/MainFragment" />
+    </fragment>
+</navigation>
